@@ -29,6 +29,8 @@ class App extends Component {
         && this.state.squares[line[1]] === s
         && this.state.squares[line[2]] === s) {
           alert(s + 'win');
+          if(s === "X") this.setState({ dagger: this.state.dagger + 1  })
+          else this.setState({ zero: this.state.zero + 1  })
           setTimeout(() => {
             this.setState({
               squares: Array(9).fill(null),
@@ -84,7 +86,9 @@ class App extends Component {
   newGame = () => {
     this.setState({
       squares: Array(9).fill(null),
-      count: 0
+      count: 0,
+      dagger: 0,
+      zero: 0
     })
   }
   render() {
