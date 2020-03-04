@@ -6,7 +6,9 @@ class App extends Component {
     super(props)
     this.state = {
       squares: Array(9).fill(null),
-      count: 0
+      count: 0,
+      dagger: 0,
+      zero: 0
     }
     this.winnerLine = [
       [0, 1, 2],
@@ -41,8 +43,10 @@ class App extends Component {
     for(let i = 0; i < element.length; i++) {
       if(element[i].textContent === "X") {
         element[i].classList.add('dagger')
+        element[i].classList.remove('zero')
       } else if(element[i].textContent === "O") {
         element[i].classList.add('zero')
+        element[i].classList.remove('dagger')
       }
     }
     if(element[0].textContent !== '' &&
@@ -62,7 +66,6 @@ class App extends Component {
             })
           }, 1000)
         }
-    // console.log(element[0].textContent !== '')
   }
   clickHandler = event => {
     let data = event.target.getAttribute('data');
@@ -78,19 +81,32 @@ class App extends Component {
     }
     this.isWinner();
   }
+  newGame = () => {
+    this.setState({
+      squares: Array(9).fill(null),
+      count: 0
+    })
+  }
   render() {
     return (
-      <div className="tic-tac-toe">
-        <div className="ttt-grid" onClick={this.clickHandler} data="0">{this.state.squares[0]}</div>
-        <div className="ttt-grid" onClick={this.clickHandler} data="1">{this.state.squares[1]}</div>
-        <div className="ttt-grid" onClick={this.clickHandler} data="2">{this.state.squares[2]}</div>
-        <div className="ttt-grid" onClick={this.clickHandler} data="3">{this.state.squares[3]}</div>
-        <div className="ttt-grid" onClick={this.clickHandler} data="4">{this.state.squares[4]}</div>
-        <div className="ttt-grid" onClick={this.clickHandler} data="5">{this.state.squares[5]}</div>
-        <div className="ttt-grid" onClick={this.clickHandler} data="6">{this.state.squares[6]}</div>
-        <div className="ttt-grid" onClick={this.clickHandler} data="7">{this.state.squares[7]}</div>
-        <div className="ttt-grid" onClick={this.clickHandler} data="8">{this.state.squares[8]}</div>
-      </div>
+      <>
+        <button className="newGame" onClick={this.newGame}>Новая игра</button>
+        <div className="score">
+            <p>X: <span>{this.state.dagger}</span></p>
+            <p>O: <span>{this.state.zero}</span></p>
+        </div>
+        <div className="tic-tac-toe">
+          <div className="ttt-grid" onClick={this.clickHandler} data="0">{this.state.squares[0]}</div>
+          <div className="ttt-grid" onClick={this.clickHandler} data="1">{this.state.squares[1]}</div>
+          <div className="ttt-grid" onClick={this.clickHandler} data="2">{this.state.squares[2]}</div>
+          <div className="ttt-grid" onClick={this.clickHandler} data="3">{this.state.squares[3]}</div>
+          <div className="ttt-grid" onClick={this.clickHandler} data="4">{this.state.squares[4]}</div>
+          <div className="ttt-grid" onClick={this.clickHandler} data="5">{this.state.squares[5]}</div>
+          <div className="ttt-grid" onClick={this.clickHandler} data="6">{this.state.squares[6]}</div>
+          <div className="ttt-grid" onClick={this.clickHandler} data="7">{this.state.squares[7]}</div>
+          <div className="ttt-grid" onClick={this.clickHandler} data="8">{this.state.squares[8]}</div>
+        </div>
+      </>
     );
   }
 }

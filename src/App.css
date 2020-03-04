@@ -32,3 +32,26 @@
   display: flex;
   color: red;
 }
+button.newGame {
+  background: #4963bf;
+  padding: 15px 50px;
+  font-size: 30px;
+  width: 261px;
+  border: none;
+  border-radius: 15px;
+  color: #ffffff;
+  margin: auto;
+  display: block;
+  margin-top: 20px;
+}
+.score {
+  display: flex;
+  width: 300px;
+  margin: auto;
+}
+.score p{
+  display: flex;
+  font-size: 100px;
+  padding-right: 20px;
+  margin: 0;
+}
