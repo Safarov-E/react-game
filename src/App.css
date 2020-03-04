@@ -19,3 +19,16 @@
   float: left;
   box-sizing: border-box;
 }
+.dagger {
+  font-size: 217px;
+  padding: 65px;
+  align-items: center;
+  display: flex;
+}
+.zero {
+  font-size: 232px;
+  padding: 50px;
+  align-items: center;
+  display: flex;
+  color: red;
+}

@@ -5,11 +5,60 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      squares: Array(9).fill(null)
+      squares: Array(9).fill(null),
+      count: 0
+    }
+    this.winnerLine = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ]
+  }
+  isWinner = () => {
+    let s = (this.state.count % 2 === 0) ? "X" : "O";
+    for(let i = 0; i < 8; i++) {
+      let line = this.winnerLine[i];
+      if(this.state.squares[line[0]] === s
+        && this.state.squares[line[1]] === s
+        && this.state.squares[line[2]] === s) {
+          alert(s + 'win');
+          setTimeout(() => {
+            this.setState({
+              squares: Array(9).fill(null),
+              count: 0
+            })
+          }, 1000)
+        }
+    }
+  }
+  componentDidUpdate() {
+    let element = document.querySelectorAll('.ttt-grid');
+    for(let i = 0; i < element.length; i++) {
+      if(element[i].textContent === "X") {
+        element[i].classList.add('dagger')
+      } else if(element[i].textContent === "O") {
+        element[i].classList.add('zero')
+      }
     }
   }
   clickHandler = event => {
-    
+    let data = event.target.getAttribute('data');
+    let currentSquares = this.state.squares;
+    if(currentSquares[data] === null) {
+      currentSquares[data] = (this.state.count % 2 === 0) ? "X" : "O";
+      this.setState({
+        squares: currentSquares,
+        count: this.state.count + 1
+      });
+    } else {
+      alert('Так  нельзя!!!');
+    }
+    this.isWinner();
   }
   render() {
     return (
