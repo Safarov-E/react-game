@@ -45,6 +45,24 @@ class App extends Component {
         element[i].classList.add('zero')
       }
     }
+    if(element[0].textContent !== '' &&
+        element[1].textContent !== '' &&
+        element[2].textContent !== '' &&
+        element[3].textContent !== '' &&
+        element[4].textContent !== '' &&
+        element[5].textContent !== '' &&
+        element[6].textContent !== '' &&
+        element[7].textContent !== '' &&
+        element[8].textContent !== '') {
+          alert('Результат игры ничья')
+          setTimeout(() => {
+            this.setState({
+              squares: Array(9).fill(null),
+              count: 0
+            })
+          }, 1000)
+        }
+    // console.log(element[0].textContent !== '')
   }
   clickHandler = event => {
     let data = event.target.getAttribute('data');
